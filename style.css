@@ -1,0 +1,437 @@
+/* ===== БАЗА ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg, #dff9fb, #c7ecee);
+  color: #2c3e50;
+}
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  padding: 80px 20px 60px;
+}
+
+.header h1 {
+  font-size: 64px;
+  letter-spacing: 2px;
+}
+
+.with-image {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.with-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.subtitle {
+  margin-top: 15px;
+  font-size: 20px;
+  color: #555;
+}
+
+/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  line-height: 1.7;
+}
+
+section {
+  margin-bottom: 80px;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+/* Подчёркивание заголовков */
+h2::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: #0984e3;
+  display: block;
+  margin-top: 10px;
+  border-radius: 2px;
+}
+
+/* ===== СПИСОК ===== */
+ul {
+  margin-left: 25px;
+}
+
+li {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+/* ===== КАРТОЧКИ ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Градиентная линия сверху */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, #0984e3, #00cec9);
+}
+
+.card h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 17px;
+  color: #555;
+}
+
+/* ===== HOVER ЭФФЕКТ ===== */
+.card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 30px;
+  background: #2d3436;
+  color: #b2bec3;
+  font-size: 14px;
+}
+
+
+/* Анимация появления */
+.hidden {
+  opacity: 1;
+  transform: none;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.8s ease;
+}
+
+/* ===== SR-72 FLYBY ===== */
+.flyby {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.sr72-fly {
+  position: absolute;
+  width: 420px;
+  top: 60%;
+  left: -500px;
+  transform: rotate(-15deg);
+  filter: drop-shadow(0 40px 60px rgba(0,0,0,0.4));
+  opacity: 0;
+}
+
+/* Анимация пролёта */
+@keyframes sr72Fly {
+  0% {
+    transform: translateX(-600px) translateY(100px) rotate(-20deg) scale(0.9);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(50vw) translateY(-80px) rotate(-5deg) scale(1);
+  }
+
+  100% {
+    transform: translateX(120vw) translateY(-200px) rotate(10deg) scale(1.1);
+    opacity: 0;
+  }
+}
+
+
+
+
+.flyby {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.sr72-fly {
+  position: absolute;
+  width: 380px;
+  top: 35%;
+  left: -40%;
+  opacity: 0;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,.4));
+}
+
+/* 💨 СЛЕД */
+.contrail {
+  position: absolute;
+  top: calc(35% + 60px);
+  left: -50%;
+  width: 600px;
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0.7),
+    rgba(255,255,255,0)
+  );
+  filter: blur(10px);
+  opacity: 0;
+}
+
+/* ✈️ АНИМАЦИИ */
+@keyframes fly {
+  0% {
+    transform: translateX(0) scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(160vw) scale(1.05);
+    opacity: 0;
+  }
+}
+
+@keyframes trail {
+  0% {
+    opacity: 0;
+    transform: translateX(0) scaleX(0.5);
+  }
+  20% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(160vw) scaleX(1.8);
+  }
+}
+
+
+
+
+/* ===== HUD ===== */
+.hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10000;
+  font-family: "Courier New", monospace;
+  color: #00ff9c;
+  opacity: 0.85;
+}
+
+/* Верхняя панель */
+.hud-top {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+/* Левая телеметрия */
+.hud-left {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* Правая панель */
+.hud-right {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  font-size: 14px;
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* Центр — прицел */
+.hud-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.crosshair {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #00ff9c;
+  position: relative;
+}
+
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  background: #00ff9c;
+}
+
+.crosshair::before {
+  width: 2px;
+  height: 80px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.crosshair::after {
+  height: 2px;
+  width: 80px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+
+/* ===== HUD ALERTS ===== */
+.hud-alert {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: "Courier New", monospace;
+  font-size: 32px;
+  letter-spacing: 4px;
+  padding: 10px 25px;
+  border: 2px solid;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10001;
+}
+
+/* WARNING */
+.warning {
+  left: 40px;
+  color: #ffd500;
+  border-color: #ffd500;
+  animation: warningBlink 1s infinite;
+}
+
+/* LOCK */
+.lock {
+  right: 40px;
+  color: #ff2b2b;
+  border-color: #ff2b2b;
+  animation: lockBlink 0.35s infinite;
+}
+
+/* Анимации */
+@keyframes warningBlink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes lockBlink {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
+
+/* ===== NAVIGATION ===== */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(5, 15, 20, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9998;
+  border-bottom: 1px solid rgba(0,255,156,0.3);
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  padding: 15px 0;
+  margin: 0;
+}
+
+.nav a {
+  color: #00ff9c;
+  text-decoration: none;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  letter-spacing: 2px;
+  position: relative;
+  padding: 5px 0;
+  transition: color 0.3s;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #00ff9c;
+  transition: width 0.3s ease;
+}
+
+.nav a:hover::after,
+.nav a.active::after {
+  width: 100%;
+}
+
+.nav a.active {
+  color: #ffffff;
+}
+
+
+section {
+  scroll-margin-top: 80px;
+}
